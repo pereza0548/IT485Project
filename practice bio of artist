@@ -1,0 +1,45 @@
+# This code shows the information about an artist, like a biography
+# Right now there is no user input, so in the code you can change the artist name -
+# - to get info about a different artist
+
+#We have to have a user agent so I just put my name, you can add your key for it to work
+API_KEY = ''
+USER_AGENT = 'Gabriela'
+
+import requests
+
+
+#This code I used from the website I was referencing
+def lastfm_get(payload):
+    # define headers and URL
+    headers = {'user-agent': USER_AGENT}
+    url = 'https://ws.audioscrobbler.com/2.0/'
+
+    # Add API key and format to the payload
+    payload['api_key'] = API_KEY
+    payload['format'] = 'json'
+
+    response = requests.get(url, headers=headers, params=payload)
+    return response
+
+
+#This is the part where you can change artist to try it out
+#The method can be changed to any method that we need later on, and the artist can be changed too
+#I think this part would be where we would ask for user input, like to change artist and method
+r = lastfm_get({
+    'method': 'artist.getInfo',
+    'artist':  'Bad Bunny'
+})
+
+#This code makes the output easier to read
+import json
+
+def jprint(obj):
+    # create a formatted string of the Python JSON object
+    text = json.dumps(obj, sort_keys=True, indent=4)
+    print(text)
+
+#too many results from just the artist name, so I added the bio key to only print the bio information
+jprint(r.json()['artist']['bio'])
+
+# I did get an output that was like a bio, so I think it was good practice
