@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %} - FlaskApp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <div class="grid-container">
+        <nav class="header">
+            <a href="/templates/index.html">Home</a>
+            <a href="/templates/api.html">API</a>
+            
+        </nav>
+        
+        <div class="sidenav">
+            <div class="side-menu">
+                <b>Filters</b>
+                <br>
+                <form action="/action_page.php">Artist/Band:
+                    <input type="text" placeholder="Search Artist/Band.." name="search">
+                    <br><br>
+                    Ablum: <select name="subject" id="subject">
+                      <option value="" selected="selected">Select subject</option>
+                    </select>
+                    <br><br>
+                    Country: <select name="topic" id="topic">
+                      <option value="" selected="selected">Please select subject first</option>
+                    </select>
+                    <br><br>
+                    Music Tags: <select name="chapter" id="chapter">
+                      <option value="" selected="selected">Please select topic first</option>
+                    </select>
+                    <br><br>
+                    <input type="submit" value="Search">
+                  </form> </a></form>
+                <form name="form1" id="form1" action="/action_page.php">
+              </div> 
+            </div>    
+        
+        <div class="content">
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+</body>
+</html>
