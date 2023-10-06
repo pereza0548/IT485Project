@@ -1,0 +1,37 @@
+# This code displays the top ten tracks for a country
+
+# put your own API Key
+API_KEY = 
+USER_AGENT = 'Gabriela'
+
+import requests
+
+def lastfm_get(payload):
+    
+    headers = {'user-agent': USER_AGENT}
+    url = 'https://ws.audioscrobbler.com/2.0/'
+
+    payload['api_key'] = API_KEY
+    payload['format'] = 'json'
+
+    response = requests.get(url, headers=headers, params=payload)
+    return response
+
+r = lastfm_get({
+    'method': 'geo.getTopTracks',
+    # Here is where you can change the country
+    'country':  'Canada',
+})
+
+
+import json
+
+def jprint(obj):
+    
+    text = json.dumps(obj, sort_keys=True, indent=4)
+    print(text)
+
+r.json()['tracks']['track']
+# This prints the name of the top 10 tracks in that country
+tracks = [t['name'] for t in r.json()['tracks']['track'][:10]]
+print(tracks)
