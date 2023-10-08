@@ -3,5 +3,13 @@
 {% block content %}
     <h1>Welcome to Notes Unleashed!</h1>
     <div> 
+        {% for data in data %}
+        {{ data['Nation'] }} 
+        {{ data['Year'] }}
+        {{ data['Population'] }}
+        <br>
+        {% endfor %}
+
+
     </div>      
 {% endblock %}
