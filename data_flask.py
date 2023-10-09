@@ -17,7 +17,7 @@ app = Flask(__name__)
 @app.route('/', methods =['GET'])                 
 
 def Data():                                        
-    API_KEY = '7cb9f9c0c97c61c2c14e43cb6c0db5d4'
+    API_KEY = ''
     USER_AGENT = 'AAMoussaA'
 
     headers = {
