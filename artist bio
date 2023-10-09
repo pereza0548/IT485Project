@@ -1,0 +1,34 @@
+# This code prints the content of the bio and also a summary
+
+#We have to have a user agent so I just put my name, you can add your key for it to work
+API_KEY = 
+USER_AGENT = 'Gabriela'
+
+import requests
+
+def lastfm_get(payload):
+    headers = {'user-agent': USER_AGENT}
+    url = 'https://ws.audioscrobbler.com/2.0/'
+
+    payload['api_key'] = API_KEY
+    payload['format'] = 'json'
+
+    response = requests.get(url, headers=headers, params=payload)
+    return response
+
+
+r = lastfm_get({
+    'method': 'artist.getInfo',
+    # This is where you can change the artist for now
+    'artist':  'Rauw Alejandro',
+    'autocorrect[0|1]': 1
+})
+
+import json
+
+def jprint(obj):
+    text = json.dumps(obj, sort_keys=True, indent=4)
+    print(text)
+
+# This prints the content and summary bios
+jprint(r.json()['artist']['bio'])
