@@ -1,7 +1,7 @@
 ##################################################################################################
-#For some Reason on my vscode environment, it won't pop the simplist flask application in a browser,
+# For some Reason on my vscode environment, it won't pop the simplist flask application in a browser,
 # So I wasn't able to see if this code worked or not.
-When I click on the golive server or run the code, it gives me error due to port issue.
+# When I click on the golive server or run the code, it gives me error due to port issue.
 ##################################################################################################
 
 
