@@ -1,0 +1,142 @@
+###################################################################################
+# In this version of the Last.FM API Request we will create a function that will
+# save us a lot of time. The function will be provided with the payload dictionary
+# that we will add extra keys to it and then pass it with our other options 
+# to make the rquest.
+###################################################################################
+# NOTE:      If you want to experience a different output 
+# ---->      Uncomment the corresponding code block.
+###################################################################################
+
+import requests
+import json
+
+
+
+############################
+########## Step 1 ##########
+############################
+
+# Starting by defining a API key and a user-agent
+# To Be able to identify yourself when making a request.
+# Declare them as Global constants.
+# Here, I used mine, you can use yours when running it.
+API_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+USER_AGENT = 'AAMoussaA'# Here you can enter your's
+
+############################
+########## Step 2 ##########
+############################
+
+#Define and create a function called lasfm_get()
+
+def lastfm_get(payload):
+    #Define headers and URL
+    url = 'http://ws.audioscrobbler.com/2.0/'
+    headers = {'user-agent' : USER_AGENT}
+    
+    # Add API Key and format to the payload
+    payload['api_key'] = API_KEY
+    payload['format'] = 'json'
+
+    response = requests.get(url, headers=headers, params=payload)
+    return response
+
+# Here we can pass the needed parameters as arguments 
+# I commented them as examples in the get funtion call as 
+#follows:
+r = lastfm_get({
+
+    # This will list data about top artist available
+    # in the last.fm platform.
+
+    'method' : 'chart.gettopartists'      #----------------> This is the one that will display the output.
+
+    # OR top artists for specific country #----------------> Uncomment for different output
+    #'method' : 'geo.getTopArtists',
+    #'country': 'Ecuador'
+
+    # OR top tracks for specific county    #----------------> Uncomment for different output
+    # 'method': 'geo.getTopTracks',
+    #'country':  'Canada',
+})
+
+print(r.status_code)      #---------------->This should print the status code! ALWAYS!
+
+
+
+###Since our code returned 200, we know it was successful.
+
+
+# We can use the python json module to print json data in an easier to understand format
+# using the jprint() function
+
+def jprint(obj):
+    #create a formatted string of the python json object
+    text = json.dumps(obj, sort_keys=True,  indent=4)
+    print(text)
+
+
+#jprint(r.json())
+# At this point the output is formatted as json response
+# which is structured as follows:
+# A dictionar with a single artists Key, containing:
+# ------- an artist Key containing a list of artist objects.
+# ------- an @attr Key containing a number of attributes about the response.
+
+#######################################################
+# if you want to look at the '@ttr' (or attributes) Key by itself 
+# you can specify it with the jprint(r.json()) call as follows:
+
+jprint(r.json()['artists']['@attr'])
+
+# The output will look like :
+#"@attr": {
+#            "page": "1",
+#            "perPage": "50",
+#            "total": "5436317",
+#            "totalPages": "108727"
+#        }
+# This output tells us that there are 5436317 total artists in the result s of this api endpoint
+# and we're being showed the first 50 artists in a single page.
+# This technique of spreading the results over multiple pages is called pagination.
+###################################################
+# If we want to return topartists, 
+# we can run this :
+
+#jprint(r.json()['topartists']['artist'])
+
+###################################################
+
+# If we want to specificaly get the top ten artists, we can specify that with:
+
+#r.json()['topartists']['artist']
+#            artists = [t = ['name']] for t in r.json()['topartists']['artist'][:10]]
+#                   jprint(artists)
+
+###################################################
+#
+# If we want to return the top tracks
+# WE can run this:
+#
+# jprint(r.json()['tracks']['track'])
+
+###################################################
+
+# If we want to specificaly get the top ten tracks 
+# we can specify that with:
+
+# r.jason()['tracks']['track']
+# tracks = [t['name']]
+#               for t in r.json()['tracks']['track'][:10]]
+#                   jprint(tracks)
+####################################################
+
+# Example  code output Below:
+#            200
+#            {
+#                "page": "1",
+#                "perPage": "50",
+#                "total": "5460118",
+#                "totalPages": "109203"
+#            }
