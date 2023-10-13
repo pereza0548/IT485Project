@@ -1,0 +1,74 @@
+@ AHMED MOUSSA
+10/13/2023
+--------------
+
+* I was successfuly able to implement 31 methods in API 
+  request statement/functions, then I used the flask 
+  webframeapp/code to display the output on the web,
+  instead of a terminal as before. 
+
+* All of them retrieved the desired response in json format.
+
+* I made sure to COMMENT through the code, so that its organized 
+  and easy to follow.
+
+* We can decide on how we want to develope the methods calls 
+  so that they can go along with the front-end expectaions. 
+
+* Below is the list of methods that I used in the code since    
+  they were available on the API documentation page and did
+  not require authorization.
+
+album
+.....
+album.search
+album.getInfo
+album.getTags
+album.getTopTags
+================
+artist
+......
+artist.search
+artist.getInfo
+artist.getSimilar
+artist.getTags
+artist.getTopTags
+artist.getTopAlbums
+artist.getTopTracks
+artist.getCorrection
+====================
+track
+.....
+track.search
+track.getInfo
+track.getSimilar
+track.getTags
+track.getTopTags
+track.getCorrection
+=====================
+tag
+...
+tag.getInfo
+tag.getSimilar
+tag.getTopAlbums
+tag.getTopArtists
+tag.getTopTags
+tag.getTopTracks
+tag.getWeeklyChartList
+======================
+chart
+.....
+chart.getTopArtists
+chart.getTopTags
+chart.getTopTracks
+===================
+geo
+...
+geo.getTopArtists
+geo.getTopTracks
+=================
+library
+.......
+library.getArtists
+============================================================
+
