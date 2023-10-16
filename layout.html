@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %} - FlaskApp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="grid-container">
+        <nav class="header">
+          <img src="Logo.png" width="100" height="100">
+          <a href="/templates/index.html">Home</a>
+          <a href="/templates/api.html">API</a>
+          <img src="Header.png" width="250" height="100" class="center">
+        </nav>
+        
+        <div class="sidenav">
+            <div class="side-menu">
+                <b>Filters</b>
+                <br>
+                <br>
+                <form action="/action_page.php">Artist/Band:
+                    <input type="text" placeholder="Search Artist/Band.." name="search">
+                    <br><br>
+                    Album: <select name="subject" id="subject">
+                      <option value="" selected="selected">Select album subject</option>
+                    </select>
+                    <br><br>
+                    Country: <select name="topic" id="topic">
+                      <option value="" selected="selected">Please select country subject.</option>
+                    </select>
+                    <br><br>
+                    Music Tags: <select name="chapter" id="chapter">
+                      <option value="" selected="selected">Please select music topic.</option>
+                    </select>
+                    <br><br>
+                    <input type="submit" value="Search">
+                  </form> </a></form>
+                <form name="form1" id="form1" action="/action_page.php">
+              </div> 
+            </div>    
+        
+        <div class="content">
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+    <footer>
+      <p>Website Made by: <br>
+      Alexandra Perez <br> Neeti Shah <br> Ahmed <br> Gabriela </p>
+    </footer>
+</body>
+</html>
