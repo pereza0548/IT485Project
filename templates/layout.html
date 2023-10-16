@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %} {% endblock %} - FlaskApp</title>
+    <title>{% block title %} {% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
 </head>
 <body>
@@ -17,24 +17,18 @@
             <div class="side-menu">
                 <b>Filters</b>
                 <br>
-                <form action="/action_page.php">Artist/Band:
-                    <input type="text" placeholder="Search Artist/Band.." name="search">
-                    <br><br>
-                    Ablum: <select name="subject" id="subject">
-                      <option value="" selected="selected">Select subject</option>
-                    </select>
-                    <br><br>
-                    Country: <select name="topic" id="topic">
-                      <option value="" selected="selected">Please select subject first</option>
-                    </select>
-                    <br><br>
-                    Music Tags: <select name="chapter" id="chapter">
-                      <option value="" selected="selected">Please select topic first</option>
-                    </select>
-                    <br><br>
-                    <input type="submit" value="Search">
-                  </form> </a></form>
-                <form name="form1" id="form1" action="/action_page.php">
+                <form method="POST">
+                  Artist/Band Name:
+                  <input placeholder="Search Artist/Band.." name="artist"><br>
+                  Album:
+                  <input placeholder="Album" name="album"><br>
+                  Country:
+                  <input placeholder="Country" name="country"><br>
+                  Music Style:
+                  <input placeholder="Ex. Rock, Pop, Country.." name="tag">
+                  <input type="submit" value="submit">  
+                </select>
+              </form>
               </div> 
             </div>    
         
