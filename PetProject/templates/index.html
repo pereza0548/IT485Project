@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+    <div style="padding-left:16px">
+        <h1>Ready to meet the new addition to your family?</h1>
+        <h2> Give them a furever home!</h2>
+    </div> 
+    
+    <div class = content>
+        <table border= 5>
+            <tr>
+                <td colspan="3">Meet INSERT NAME</td>
+            </tr>
+            <tr>
+                <td>  <img src="https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/69361477/1/?bust=1698525980&width=300" alt="Pet Image"></td>
+                <td colspan="2">INSERT BIO</td>
+            </tr>
+            <tr>
+                <td>INSERT DETAILS</td>
+                <td>INSERT "GOOD WITH"</td>
+                <td>INSERT CONTACT</td>
+            </tr>
+         </table>
+
+         {{value}}
+         <br>
+         
+    </div>
+{% endblock %}
