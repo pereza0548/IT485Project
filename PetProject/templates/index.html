@@ -1,29 +1,55 @@
 {% extends 'layout.html' %}
-{% block title %} Home {% endblock %}
+{% block title %} Results {% endblock %}
 {% block content %}
-    <div style="padding-left:16px">
-        <h1>Ready to meet the new addition to your family?</h1>
-        <h2> Give them a furever home!</h2>
-    </div> 
-    
     <div class = content>
-        <table border= 5>
+        <table border= "5">
             <tr>
                 <td colspan="3">Meet INSERT NAME</td>
             </tr>
             <tr>
                 <td>  <img src="https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/69361477/1/?bust=1698525980&width=300" alt="Pet Image"></td>
-                <td colspan="2">INSERT BIO</td>
+                <td colspan="2">
+                </td>
+            </tr>
+        </table>
+        <br>
+        <table id="attributes" border="5">
+            <tr>
+                <th>DETAILS</th>
+                <th>INSERT "GOOD WITH"</th>
+                <th>INSERT CONTACT</th>
             </tr>
             <tr>
-                <td>INSERT DETAILS</td>
-                <td>INSERT "GOOD WITH"</td>
-                <td>INSERT CONTACT</td>
+                <td>Type</td>
+                <td>Kids</td>
+                <td>Email</td>
+            </tr>
+            <tr>
+                <td>Size:</td>
+                <td>Type:</td>
+                <td>Phone:</td>
+            </tr>
+            <tr>
+                <td>Gender:</td>
+                <td>Cats:</td>
+                <td>Address:</td>
+            </tr>
+            <tr>
+                <td>Age:</td>
+                <td>House Trained:</td>
+                
+            </tr>
+            <tr>
+                <td>State:</td>
+                
+            </tr>
+            <tr>
+                <td>Coat:</td>
+              
             </tr>
          </table>
-
-         {{value}}
          <br>
-         
+         {{value}}
+         {{param}}
     </div>
 {% endblock %}
