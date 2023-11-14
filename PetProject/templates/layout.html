@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <script type='text/javascript' src="static\js\app.js"></script>  -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
 </head>
@@ -10,8 +11,9 @@
 <body>  
   <div class="grid-container">
     <nav class="header">
-      <img src="/static/images/Logo.png" width="100" height="100">
-      <a href="/templates/index.html">Home</a>
+      <a href="{{ url_for('getParams') }}" class="logo"><img src="/static/images/Logo.jpg" width="100" height="100"></a>
+      <a href="{{ url_for('directions') }}">Directions</a>
+      <a href="{{ url_for('gallery') }}">Gallery</a>
     </nav>
 
     <div class="sidenav">
