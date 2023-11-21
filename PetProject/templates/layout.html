@@ -4,37 +4,35 @@
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- <script type='text/javascript' src="static\js\app.js"></script>  -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
 </head>
 
 <body>  
   <div class="grid-container">
     <nav class="header">
       <a href="{{ url_for('getParams') }}" class="logo"><img src="/static/images/Logo.jpg" width="100" height="100"></a>
-      <a href="{{ url_for('directions') }}">Directions</a>
-      <a href="{{ url_for('gallery') }}">Gallery</a>
+      <p1 class="compName"><i class="fa fa-paw"></i>Pawsome Pets<i class="fa fa-paw"></i></a>
     </nav>
 
     <div class="sidenav">
       <div class="side-menu">
-        <b>Filters</b>
+        <p1 class="title"><b>Filters</b></p1>
           <br>
             <form method="POST">
-              <label class="required-field" for="location" >Location:</label>
+              <label class="required-field" for="location" >Zipcode:</label>
                 <input placeholder="Enter 5 digit postcode" name="zipcode" required><br>
-              <label for="type">Type:</label>
-                <select name="type" id="type">
+              <label class="required-field" for="location" >State:</label>
+                <input placeholder="State abbreviation" name="state" required><br>
+              <label for="type">Type:</label>           
+                  <select name="type">
                     <option value=""  selected disabled> -- select an option -- </option>
-                    <option value="dog">Dog</option> 
-                    <option value="cat">Cat</option>
-                    <option value="rabbit">Rabbit</option>
-                    <option value="small & furry">Small & Furry</option>
-                    <option value="horse">Horse</option>
-                    <option value="bird">Bird</option>
-                    <option value="scales, fins & other">Scales, Fins & Other</option>
-                    <option value="barnyard">Barnyard</option>
-                    </select><br>                      
+                    {% for type in types %}
+                        <option value="{{ type }}">{{ type }}</option>
+                    {% endfor %}
+                 </select><br>                      
               <label for="gender">Gender:</label><br>
                 <select name="gender" id="gender"> 
                   <option value=""  selected disabled> -- select an option -- </option>

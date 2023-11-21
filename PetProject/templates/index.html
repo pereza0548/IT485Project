@@ -5,10 +5,10 @@
     {% for animal in value %}
         <table border= "5">
             <tr>
-                <td colspan="3">Meet {{animal.name}}</td>
+                <td colspan="3" class="name"><b>Meet {{animal.name}}</b></td>
             </tr>
             <tr>
-                <td><img src="{{animal.photos[0].small}}"></td>
+                <td><img src="{{animal.photos[0].medium}}"></td>
                 <td colspan="2"> {{animal.description}}
                 </td>
             </tr>
@@ -35,7 +35,7 @@
                 <td>Email: {{animal.contact.email}}</td>
             </tr>
             <tr>
-                <td>{{animal.size}}</td>
+                <td>Size: {{animal.size}}</td>
                 <td>Dogs: 
                         {% if animal.environment.dogs %}
                             <i class="fa fa-check"></i>
@@ -64,10 +64,8 @@
                     {% else %}
                         <i class="fa fa-close"></i>
                     {% endif %} 
-             
-
-                </td>
-                
+                </td>    
+                <td>State: {{animal.contact.address.state}}</td>        
             </tr>
             <tr>
                 <td>Coat: 
