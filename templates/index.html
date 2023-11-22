@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+{% block title %} Results {% endblock %}
+{% block content %}
+    <div class = content>
+    {% for animal in value %}
+        <table border= "5">
+            <tr>
+                <td colspan="3" class="name"><b>Meet {{animal.name}}</b></td>
+            </tr>
+            <tr>
+                <td><img src="{{animal.photos[0].medium}}"></td>
+                <td colspan="2"> {{animal.description}}
+                </td>
+            </tr>
+        </table>
+        <table id="attributes" border="5">
+            <tr>
+                <th>About</th>
+                <th>Good with other Siblings</th>
+                <th>Orgainzation {{animal.name}} lives with</th>
+            </tr>
+            <tr>
+                <td>Breed(s): {{animal.breeds.primary}} 
+                    {% if animal.breeds.secondary %}
+                        /{{animal.breeds.secondary }} 
+                    {%endif%}      
+                </td>
+                <td>Kids:
+                    {% if animal.environment.children %}
+                        <i class="fa fa-check"></i>
+                    {% else %}
+                        <i class="fa fa-close"></i>
+                    {% endif %}
+                </td>
+                <td>Email: {{animal.contact.email}}</td>
+            </tr>
+            <tr>
+                <td>Size: {{animal.size}}</td>
+                <td>Dogs: 
+                        {% if animal.environment.dogs %}
+                            <i class="fa fa-check"></i>
+                        {% else %}
+                            <i class="fa fa-close"></i>
+                        {% endif %}
+                </td>
+                <td>Phone: {{animal.contact.phone}}</td>
+            </tr>
+            <tr>
+                <td>{{animal.gender}}</td>
+                <td>Cats:
+                        {% if animal.environment.cats %}
+                            <i class="fa fa-check"></i>
+                        {% else %}
+                            <i class="fa fa-close"></i>
+                        {% endif %}
+                </td>
+                <td>City: {{animal.contact.address.city}}</td>
+            </tr>
+            <tr>
+                <td>{{animal.age}}</td>
+                <td>House Trained:
+                    {%if animal.attributes.house_trained %}
+                        <i class="fa fa-check"></i>
+                    {% else %}
+                        <i class="fa fa-close"></i>
+                    {% endif %} 
+                </td>    
+                <td>State: {{animal.contact.address.state}}</td>        
+            </tr>
+            <tr>
+                <td>Coat: 
+                    {% if animal.coat %}
+                        {{animal.coat}}
+                    {% else %}
+                        Unknown
+                    {% endif%}    
+                </td>
+              
+            </tr>
+            <tr>
+
+                <td colspan="3">To learn more about {{animal.name}}, visit <a href="{{animal.url}}" target="_blank">here</a></td>
+
+            </tr>
+         </table>
+         <br>
+         {% endfor %}
+        
+    </div>
+{% endblock %}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/Logo.ico')}}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/apple-touch-icon.png')}}">
+    <link rel="icon" href="{{ url_for('static', filename='images/android.png')}}">
+
+</head>
+
+<body>  
+  <div class="grid-container">
+    <p class="skipnavigation"><a href="#contentstart">Skip navigation</a></p> 
+      <nav class="header">
+        <a href="{{ url_for('getParams') }}" class="logo"><img src="/static/images/Logo.jpg" width="100" height="100"></a>
+        <p1 class="compName"><i class="fa fa-paw"></i>Pawsome Pets<i class="fa fa-paw"></i></a>
+      </nav>
+      
+      <div class="sidenav">
+      <div class="side-menu">
+        <p1 class="title"><b>Filters</b></p1>
+          <br>
+            <form class="skipnavigation" method="POST">
+              <label class="required-field" for="location" >Zipcode:</label>
+                <input placeholder="Enter 5 digit postcode" name="zipcode" required><br>
+              <label class="required-field" for="location" >State:</label>
+                <input placeholder="State abbreviation" name="state" required><br>
+              <label for="type">Type:</label>           
+                  <select name="type">
+                    <option value=""  selected disabled> -- select an option -- </option>
+                    {% for type in types %}
+                        <option value="{{ type }}">{{ type }}</option>
+                    {% endfor %}
+                 </select><br>                      
+              <label for="gender">Gender:</label><br>
+                <select name="gender" id="gender"> 
+                  <option value=""  selected disabled> -- select an option -- </option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="unknown">Unknown</option>
+                </select><br>
+              <label for="age">Age:</label><br>
+                <select name="age" id="age"> 
+                  <option value=""  selected disabled> -- select an option -- </option>
+                  <option value="Baby">Baby</option>
+                  <option value="Young">Young</option>
+                  <option value="Adult">Adult</option>
+                  <option value="Senior">Senior</option>
+                </select><br>
+              <label for="Size">Size:</label><br>
+                <select name="size" id="size"> 
+                  <option value=""  selected disabled> -- select an option -- </option>
+                  <option value="Small">Small</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Large">Large</option>
+                  <option value="X-Large">X-Large</option>
+                </select><br>
+                <label for="sort">Sort:</label><br>
+                <select name="sort" id="sort">
+                  <option value="distance" selected>Closest(Default)</option>
+                  <option value="-distance">Furthest</option>              
+                  <option value="recent">Most Recent</option>
+                  <option value="-recent">Longest Waiting</option>
+                  <option value="random">Random</option>            
+                </select> 
+              <input type="submit" value="submit">
+            </form>
+          </div> 
+    </div>    
+        
+    <div class="content">
+      <div style="padding-left:16px">
+        <h1>Ready to meet the new addition to your family?</h1>
+        <h2> Give them a furever home!</h2>
+      </div> 
+            {% block content %} {% endblock %}
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Website Made by: <br>
+    Alexandra Perez &nbsp; Neeti Shah &nbsp;  
+    Ahmed Moussa &nbsp; Gabriela Villalta</p>
+  </footer>  
+  
+</body>
+</html>
