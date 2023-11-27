@@ -9,9 +9,12 @@ html {
 }
 
 body {
-  font-family: 'Gloria Hallelujah', cursive;
+  font-family:'Handlee', cursive;
+  font-size: large;
 }
-
+p1 {
+  font-size: x-large;
+}
 /* Header */
 .header {
   grid-area: header;

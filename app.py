@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
-import requests
 from api_keys import CALL_URL, access_token, typeURL
-import re, html
+from uszipcode import SearchEngine
+import requests, html
 
 app = Flask(__name__)
 
@@ -16,7 +16,7 @@ def getAnimalResponse(params, message):
     }
     animalResponse = requests.get(CALL_URL, headers=headers, params= params)
     
-    data =animalResponse.json().get('animals')
+    data = animalResponse.json().get('animals')
 
     if not data:
        return message
@@ -26,8 +26,13 @@ def getAnimalResponse(params, message):
 # DEFINE A FUNCTION TO VALIDATE AND CHECK THE POSTAL CODE
 # ENTERED BY THE USER, RETURNING A MESSAGE IF ERROR!!
 
-def valid_zip(zipcode):
-        return re.match(r'^\d{5}$', zipcode) is not None
+def valid_zip(zipcode, state):
+    search = SearchEngine()
+    zipcode_info = search.by_zipcode(zipcode)
+    if zipcode_info and zipcode_info.state == state:
+       return False
+    else:
+       return True
 
 # [3]
 # DEFINE A FUNCTION TO AGGREGATE THE FILTERED RESPONSE 
@@ -74,8 +79,8 @@ def getParams():
 
         # [6]
         # VALIDATE THE ZIPCODE ENTERERED BY THE USER.
-        if not valid_zip(zipcode):
-            return render_template ('zipError.html', types = types)
+        if valid_zip(zipcode, state):
+            return render_template('zipError.html', types = types)
         
         # [7]
         # RESTORE THE OPTAINED PARAMETERS IN VARIABLES
@@ -93,8 +98,7 @@ def getParams():
         # [8]
         # DEFINE THE MESSAGE ARGUMENT TO FLAG THE 
         # UNAVAILABILITY IN THE PROVIDED ZIPCODE.
-        message = "No pets found around here. Please try a different set of filters. There's a pet waiting to come home with you."
-
+        message="No results found here, please try again to find your newest family member."
 
         # NOW MAKE THE API REQUEST BY CALLING THE 
         # getAnimalResponse() DEFINED EARLIER,
@@ -108,13 +112,12 @@ def getParams():
         r = getAnimalResponse(params, message)
 
         if r == message:
-                return render_template('noresults.html', value=r, params = params, types = types)
+                return render_template('noresults.html', value=r, types = types)
         
         # [10]
         # RESTORE THE FILTERED RESPONSE AS A LIST OF DICTIONARIES
         # TO REPRESENT EACH AVAILABLE ANIMAL.
         details = storeDetails(r)
-        
         
         return render_template('index.html', value = details, types = types)
     
