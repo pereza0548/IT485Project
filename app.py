@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from api_keys import CALL_URL, access_token, typeURL
-from uszipcode import SearchEngine
+from uszipcode import SearchEngine #pip install uszipcode
 import requests, html
 
 app = Flask(__name__)
