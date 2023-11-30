@@ -44,7 +44,7 @@ def storeDetails(details):
         filter_details={
             'name': html.unescape(animal.get('name', 'N/A')),
             'breeds': animal.get('breeds', 'N/A'),
-            'color' : animal.get('color', 'N/A'),
+            'colors' : animal.get('colors', 'N/A'),
             'size': animal.get('size', 'N/A'),
             'gender': animal.get('gender', 'N/A'),
             'age': animal.get('age', 'N/A'),
@@ -86,8 +86,7 @@ def getParams():
         # RESTORE THE OPTAINED PARAMETERS IN VARIABLES
         # TO BE PASSED IN THE API CALL, IN THE PARAMS ARGUMENT.
         params = {
-                "location" : zipcode, 
-                "location" : state,
+                "location" : (zipcode, state),
                 "type" : type,
                 "gender" : gender,
                 "age": age,
