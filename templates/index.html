@@ -3,17 +3,16 @@
 {% block content %}
     <div class = content>
     {% for animal in value %}
-        <table border= "5">
+        <table>
             <tr>
-                <td colspan="3" class="name"><b>Meet {{animal.name}}</b></td>
+                <th colspan="3" id="name"><b>Meet {{animal.name}}</b></th>
             </tr>
             <tr>
-                <td><img src="{{animal.photos[0].medium}}"></td>
+                <td id="picture"><img src="{{animal.photos[0].medium}}" alt="{{animal.name}} is a {{animal.type}}, {{animal.age}}, {{animal.size}}, {{animal.colors.primary}}, {{animal.breeds.primary}}"></td>
                 <td colspan="2"> {{animal.description}}
                 </td>
             </tr>
-        </table>
-        <table id="attributes" border="5">
+        
             <tr>
                 <th>About</th>
                 <th>Good with other Siblings</th>
@@ -46,7 +45,7 @@
                 <td>Phone: {{animal.contact.phone}}</td>
             </tr>
             <tr>
-                <td>{{animal.gender}}</td>
+                <td>{{animal.age}} {{animal.gender}}</td>
                 <td>Cats:
                         {% if animal.environment.cats %}
                             <i class="fa fa-check"></i>
@@ -57,7 +56,7 @@
                 <td>City: {{animal.contact.address.city}}</td>
             </tr>
             <tr>
-                <td>{{animal.age}}</td>
+                <td>Color(s): {{animal.colors.primary}}</td>
                 <td>House Trained:
                     {%if animal.attributes.house_trained %}
                         <i class="fa fa-check"></i>
@@ -74,8 +73,15 @@
                     {% else %}
                         Unknown
                     {% endif%}    
+                </td>  
+                <td>Spayed/Neutered:   
+                    {%if animal.attributes.spayed_neutered %}
+                        <i class="fa fa-check"></i>
+                    {% else %}
+                        <i class="fa fa-close"></i>
+                    {% endif %} 
                 </td>
-              
+                <td>Postal Code: {{animal.contact.address.postcode}}</td>
             </tr>
             <tr>
 

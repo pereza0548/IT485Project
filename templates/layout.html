@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} {% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
@@ -18,21 +19,20 @@
   <div class="grid-container">
     <p class="skipnavigation"><a href="#contentstart">Skip navigation</a></p> 
       <nav class="header">
-        <a href="{{ url_for('getParams') }}" class="logo"><img src="/static/images/Logo.jpg" width="100" height="100"></a>
-        <p1 class="compName"><i class="fa fa-paw"></i>Pawsome Pets<i class="fa fa-paw"></i></a>
+        <a href="{{ url_for('getParams') }}" class="logo"><img src="/static/images/Logo.jpg" width="100" height="100" alt="Image is of cat and dog in a heart outline"></a>
+        <a href="{{url_for('getParams') }}" class="compName"><img src="/static/images/header.png" alt="Paw print on left and right side of Pawsome Pets"></a>
       </nav>
       
       <div class="sidenav">
       <div class="side-menu">
-        <p1 class="title"><b>Filters</b></p1>
-          <br>
+        <p class="title"><b>Filters</b></p>
             <form class="skipnavigation" method="POST">
-              <label class="required-field" for="location" >Zipcode:</label>
-                <input placeholder="Enter 5 digit postcode" name="zipcode" required><br>
+              <label class="required-field" for="location" >Postcode:</label>
+                <input id="location" placeholder="Enter 5 digit postcode" name="zipcode" required><br>
               <label class="required-field" for="location" >State:</label>
-                <input placeholder="State abbreviation" name="state" required><br>
+                <input id="locationState" placeholder="State abbreviation" name="state" required><br>
               <label for="type">Type:</label>           
-                  <select name="type">
+                  <select id="type" name="type">
                     <option value=""  selected disabled> -- select an option -- </option>
                     {% for type in types %}
                         <option value="{{ type }}">{{ type }}</option>
@@ -53,7 +53,7 @@
                   <option value="Adult">Adult</option>
                   <option value="Senior">Senior</option>
                 </select><br>
-              <label for="Size">Size:</label><br>
+              <label for="size">Size:</label><br>
                 <select name="size" id="size"> 
                   <option value=""  selected disabled> -- select an option -- </option>
                   <option value="Small">Small</option>
