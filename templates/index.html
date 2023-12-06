@@ -10,16 +10,12 @@
             <tr>
                 <td id="picture">
                     {%  if animal.photos %}
-                        <img src="{{animal.photos[0].medium}}" alt="Photo of pet">
+                        <img src="{{animal.photos[0].medium}}" alt="{{animal.name}} is a {{animal.colors.primary}} {{animal.breeds.primary}}  ">
                     {%else%}
-                        <img src="/static/images/Logo.jpg" width="100" height="100" alt="No picture of pet, logo picture in place">
+                        <img class="petPic" src="/static/images/Logo.jpg" alt="No picture of pet, logo picture in place">
                     {%endif%}
-                   </td>
-                <td colspan="2"> 
-                    
-                        {{animal.description}}
-                    
-                    </td>
+                </td>
+                <td colspan="2"> {{animal.description}}</td>
             </tr>
         
             <tr>
