@@ -4,7 +4,21 @@ from uszipcode import SearchEngine #pip install uszipcode
 import requests, html
 
 app = Flask(__name__)
+# GET TYPES OF ANIMAL GROUPS TO SEARCH BY FROM API 
+def getTypes():
+    headers = {
+        "Authorization": "Bearer " + access_token
+    }
+    animalResponse = requests.get(typeURL, headers=headers)
+    
+    data =animalResponse.json().get('types')
+   
+    types = []
+    for type in data:
+        types.append(type.get('name'))
+    return types
 
+types= getTypes()
 # [1]
 # DEFINE A FUNCTION  TO BE CALLED LATER
 # TO MAKE THE API REQUEST AND STORE THE
@@ -42,7 +56,7 @@ def storeDetails(details):
     animal_details = []
     for animal in details:
         filter_details={
-            'name': html.unescape(animal.get('name', 'N/A')),
+            'name':  animal.get('name', 'N/A'),
             'breeds': animal.get('breeds', 'N/A'),
             'colors' : animal.get('colors', 'N/A'),
             'size': animal.get('size', 'N/A'),
@@ -51,11 +65,16 @@ def storeDetails(details):
             'environment' : animal.get('environment', 'N/A'),
             'attributes' : animal.get('attributes', 'N/A'),
             'photos' : animal.get('photos', 'N/A'),
-            'description' : html.unescape(animal.get('description', 'N/A')),
+            'description' :  animal.get('description', 'N/A'),
             'url' : animal.get('url', 'N/A'),
             'contact' : animal.get('contact', 'N/A'),
             'coat' : animal.get('coat', 'N/A')
-            }
+            }    
+        if filter_details['description']:
+            filter_details['description'] = html.unescape(filter_details['description'])
+        else:
+            filter_details['description'] = filter_details['name'] + " needs a home"
+        filter_details['description'] = filter_details['description'].replace('&#39;', "'")
         animal_details.append(filter_details)
     return animal_details
 
@@ -66,11 +85,11 @@ def storeDetails(details):
 
 # [5]
 #  GET THE PARAMETERS FROM USER INPUT
-def getParams():                
-    types = getTypes()   
+def getParams():                  
     if request.method == 'POST':
         zipcode = request.form.get('zipcode')
         state = request.form.get('state')
+        state = state.upper()
         type = request.form.get('type')
         gender = request.form.get('gender')
         age = request.form.get('age')
@@ -122,20 +141,6 @@ def getParams():
     
     return render_template('Home.html', types = types)
 
-# [11]
-# GET TYPES OF ANIMAL GROUPS TO SEARCH BY FROM API 
-def getTypes():
-    headers = {
-        "Authorization": "Bearer " + access_token
-    }
-    animalResponse = requests.get(typeURL, headers=headers)
-    
-    data =animalResponse.json().get('types')
-   
-    types = []
-    for type in data:
-        types.append(type.get('name'))
-    return types
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
