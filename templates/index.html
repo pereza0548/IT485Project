@@ -8,9 +8,18 @@
                 <th colspan="3" id="name"><b>Meet {{animal.name}}</b></th>
             </tr>
             <tr>
-                <td id="picture"><img src="{{animal.photos[0].medium}}" alt="{{animal.name}} is a {{animal.type}}, {{animal.age}}, {{animal.size}}, {{animal.colors.primary}}, {{animal.breeds.primary}}"></td>
-                <td colspan="2"> {{animal.description}}
-                </td>
+                <td id="picture">
+                    {%  if animal.photos %}
+                        <img src="{{animal.photos[0].medium}}" alt="Photo of pet">
+                    {%else%}
+                        <img src="/static/images/Logo.jpg" width="100" height="100" alt="No picture of pet, logo picture in place">
+                    {%endif%}
+                   </td>
+                <td colspan="2"> 
+                    
+                        {{animal.description}}
+                    
+                    </td>
             </tr>
         
             <tr>
@@ -56,7 +65,12 @@
                 <td>City: {{animal.contact.address.city}}</td>
             </tr>
             <tr>
-                <td>Color(s): {{animal.colors.primary}}</td>
+                <td>Coat: 
+                    {% if animal.coat %}
+                        {{animal.coat}}
+                    {% else %}
+                        Unknown
+                    {% endif%}    </td>
                 <td>House Trained:
                     {%if animal.attributes.house_trained %}
                         <i class="fa fa-check"></i>
@@ -67,12 +81,7 @@
                 <td>State: {{animal.contact.address.state}}</td>        
             </tr>
             <tr>
-                <td>Coat: 
-                    {% if animal.coat %}
-                        {{animal.coat}}
-                    {% else %}
-                        Unknown
-                    {% endif%}    
+                <td>Color(s): {{animal.colors.primary}}   
                 </td>  
                 <td>Spayed/Neutered:   
                     {%if animal.attributes.spayed_neutered %}
