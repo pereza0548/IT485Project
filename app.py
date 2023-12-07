@@ -5,6 +5,7 @@ import requests, html
 
 app = Flask(__name__)
 # GET TYPES OF ANIMAL GROUPS TO SEARCH BY FROM API 
+
 def getTypes():
     headers = {
         "Authorization": "Bearer " + access_token
@@ -19,6 +20,7 @@ def getTypes():
     return types
 
 types= getTypes()
+
 # [1]
 # DEFINE A FUNCTION  TO BE CALLED LATER
 # TO MAKE THE API REQUEST AND STORE THE
@@ -74,7 +76,7 @@ def storeDetails(details):
             filter_details['description'] = html.unescape(filter_details['description'])
         else:
             filter_details['description'] = filter_details['name'] + " needs a home"
-        filter_details['description'] = filter_details['description'].replace('&#39;', "'")
+        filter_details['description'] = filter_details['description'].replace('&#39;', "'").replace('&amp;', "&")
         animal_details.append(filter_details)
     return animal_details
 
@@ -116,17 +118,9 @@ def getParams():
         # [8]
         # DEFINE THE MESSAGE ARGUMENT TO FLAG THE 
         # UNAVAILABILITY IN THE PROVIDED ZIPCODE.
+
         message="No results found here, please try again to find your newest family member."
 
-        # NOW MAKE THE API REQUEST BY CALLING THE 
-        # getAnimalResponse() DEFINED EARLIER,
-        # PASSING THE PARAMS AND MESSAGE TO BE
-        # PROCCESSED WITH THE HEADER ARGUMENT.
-        # vALUE WILL BE RETURNED IF A PET WAS FOUND,
-        # OTHERWISE DISPLAY A MESSAGE.
-
-        # [9]
-        # STORE THE FILTERED RESPONSE IN A VARIABLE 'r'.
         r = getAnimalResponse(params, message)
 
         if r == message:
